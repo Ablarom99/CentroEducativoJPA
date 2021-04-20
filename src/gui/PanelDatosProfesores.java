@@ -9,19 +9,18 @@ import javax.swing.JPanel;
 
 import java.awt.GridBagConstraints;
 
-public class PanelDatosEstudiante extends JPanel {
+public class PanelDatosProfesores extends JPanel {
 
 	pnlDatosPersonales pnlDatosPersonales = new pnlDatosPersonales();
 
 	/**
 	 * Launch the application.
 	 */
-	
 
 	/**
 	 * Create the application.
 	 */
-	public PanelDatosEstudiante() {
+	public PanelDatosProfesores() {
 		initialize();
 	}
 
