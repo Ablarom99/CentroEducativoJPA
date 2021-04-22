@@ -91,7 +91,7 @@ public class pnlDatosPersonales extends JPanel {
 		add(lblSexo, gbc_lblSexo);
 		
 		jcbSexo = new JComboBox();
-		jcbSexo.setEditable(true);
+		jcbSexo.setEnabled(false);
 		GridBagConstraints gbc_jcbSexo = new GridBagConstraints();
 		gbc_jcbSexo.insets = new Insets(0, 0, 5, 0);
 		gbc_jcbSexo.fill = GridBagConstraints.HORIZONTAL;
