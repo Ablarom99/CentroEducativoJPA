@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 public class pnlDatosPersonales extends JPanel {
 	private JTextField jtfNombre;
@@ -15,6 +16,8 @@ public class pnlDatosPersonales extends JPanel {
 	private JTextField jtfDir;
 	private JTextField jtfEmail;
 	private JTextField jtfTel;
+	private JLabel lblSexo;
+	private JComboBox jcbSexo;
 
 	
 	/**
@@ -23,9 +26,9 @@ public class pnlDatosPersonales extends JPanel {
 	public pnlDatosPersonales() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -79,12 +82,29 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_jtfApellido2.gridy = 2;
 		add(jtfApellido2, gbc_jtfApellido2);
 		
+		lblSexo = new JLabel("Sexo:");
+		GridBagConstraints gbc_lblSexo = new GridBagConstraints();
+		gbc_lblSexo.anchor = GridBagConstraints.EAST;
+		gbc_lblSexo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSexo.gridx = 0;
+		gbc_lblSexo.gridy = 3;
+		add(lblSexo, gbc_lblSexo);
+		
+		jcbSexo = new JComboBox();
+		jcbSexo.setEditable(true);
+		GridBagConstraints gbc_jcbSexo = new GridBagConstraints();
+		gbc_jcbSexo.insets = new Insets(0, 0, 5, 0);
+		gbc_jcbSexo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jcbSexo.gridx = 1;
+		gbc_jcbSexo.gridy = 3;
+		add(jcbSexo, gbc_jcbSexo);
+		
 		JLabel lblDni = new JLabel("Dni:");
 		GridBagConstraints gbc_lblDni = new GridBagConstraints();
 		gbc_lblDni.anchor = GridBagConstraints.EAST;
 		gbc_lblDni.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDni.gridx = 0;
-		gbc_lblDni.gridy = 3;
+		gbc_lblDni.gridy = 4;
 		add(lblDni, gbc_lblDni);
 		
 		jtfDni = new JTextField();
@@ -93,7 +113,7 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_jtfDni.insets = new Insets(0, 0, 5, 0);
 		gbc_jtfDni.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfDni.gridx = 1;
-		gbc_jtfDni.gridy = 3;
+		gbc_jtfDni.gridy = 4;
 		add(jtfDni, gbc_jtfDni);
 		
 		JLabel lblDireccin = new JLabel("Dirección:");
@@ -101,7 +121,7 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_lblDireccin.anchor = GridBagConstraints.EAST;
 		gbc_lblDireccin.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDireccin.gridx = 0;
-		gbc_lblDireccin.gridy = 4;
+		gbc_lblDireccin.gridy = 5;
 		add(lblDireccin, gbc_lblDireccin);
 		
 		jtfDir = new JTextField();
@@ -110,7 +130,7 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_jtfDir.insets = new Insets(0, 0, 5, 0);
 		gbc_jtfDir.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfDir.gridx = 1;
-		gbc_jtfDir.gridy = 4;
+		gbc_jtfDir.gridy = 5;
 		add(jtfDir, gbc_jtfDir);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -118,7 +138,7 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 5;
+		gbc_lblEmail.gridy = 6;
 		add(lblEmail, gbc_lblEmail);
 		
 		jtfEmail = new JTextField();
@@ -127,7 +147,7 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_jtfEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_jtfEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfEmail.gridx = 1;
-		gbc_jtfEmail.gridy = 5;
+		gbc_jtfEmail.gridy = 6;
 		add(jtfEmail, gbc_jtfEmail);
 		
 		JLabel lblTelfono = new JLabel("Teléfono:");
@@ -135,7 +155,7 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_lblTelfono.anchor = GridBagConstraints.EAST;
 		gbc_lblTelfono.insets = new Insets(0, 0, 0, 5);
 		gbc_lblTelfono.gridx = 0;
-		gbc_lblTelfono.gridy = 6;
+		gbc_lblTelfono.gridy = 7;
 		add(lblTelfono, gbc_lblTelfono);
 		
 		jtfTel = new JTextField();
@@ -143,7 +163,7 @@ public class pnlDatosPersonales extends JPanel {
 		GridBagConstraints gbc_jtfTel = new GridBagConstraints();
 		gbc_jtfTel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfTel.gridx = 1;
-		gbc_jtfTel.gridy = 6;
+		gbc_jtfTel.gridy = 7;
 		add(jtfTel, gbc_jtfTel);
 
 	}
