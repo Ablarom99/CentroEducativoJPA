@@ -6,6 +6,9 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+
+import model.Tipologiasexo;
+
 import javax.swing.JComboBox;
 
 public class pnlDatosPersonales extends JPanel {
@@ -17,7 +20,7 @@ public class pnlDatosPersonales extends JPanel {
 	private JTextField jtfEmail;
 	private JTextField jtfTel;
 	private JLabel lblSexo;
-	private JComboBox jcbSexo;
+	private JComboBox<Tipologiasexo>jcbSexo;
 
 	
 	/**
@@ -91,7 +94,6 @@ public class pnlDatosPersonales extends JPanel {
 		add(lblSexo, gbc_lblSexo);
 		
 		jcbSexo = new JComboBox();
-		jcbSexo.setEnabled(false);
 		GridBagConstraints gbc_jcbSexo = new GridBagConstraints();
 		gbc_jcbSexo.insets = new Insets(0, 0, 5, 0);
 		gbc_jcbSexo.fill = GridBagConstraints.HORIZONTAL;
@@ -209,5 +211,12 @@ public class pnlDatosPersonales extends JPanel {
 	public void setTelefono(String telefono) {
 		this.jtfTel.setText(telefono);
 	}
+	public JComboBox<Tipologiasexo>getJcbSexo(){
+        return jcbSexo;
+    }
+
+    public void setJcbSexo(JComboBox<Tipologiasexo>jcbSexo) {
+        this.jcbSexo=jcbSexo;
+    }
 
 }
