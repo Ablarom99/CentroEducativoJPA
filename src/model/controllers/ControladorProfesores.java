@@ -130,10 +130,11 @@ public class ControladorProfesores {
 	 * @param id
 	 * @return
 	 */
-	public void borrar(Profesor actual) {
+	public void borrar(Profesor p) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
-		em.remove(actual);
+		p=em.merge(p);
+		em.remove(p);
 		em.getTransaction().commit();
 		em.close();
 }

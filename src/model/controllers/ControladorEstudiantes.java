@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import model.Estudiante;
+import model.Profesor;
 
 
 
@@ -130,11 +131,12 @@ public class ControladorEstudiantes {
 		 * @param id
 		 * @return
 		 */
-		public void borrar(Estudiante e) {
+		public void borrar(Estudiante p) {
 			EntityManager em = factory.createEntityManager();
 			em.getTransaction().begin();
-			em.remove(e);
+			p=em.merge(p);
+			em.remove(p);
 			em.getTransaction().commit();
 			em.close();
-}
+	}
 }

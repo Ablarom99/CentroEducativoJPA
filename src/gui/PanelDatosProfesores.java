@@ -35,6 +35,8 @@ public class PanelDatosProfesores extends JPanel {
 	 */
 	public PanelDatosProfesores() {
 		initialize();
+		this.actual = ControladorProfesores.getInstance().findPrimero();
+		cargarActualEnPantalla();
 	}
 
 	/**
@@ -56,38 +58,75 @@ public class PanelDatosProfesores extends JPanel {
 		add(toolBar, gbc_toolBar);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-			actual = ControladorProfesores.
-			cargarActualEnPantalla();
-		});
 		btnNewButton.setIcon(new ImageIcon(PanelDatosEstudiante.class.getResource("/iconos/primen.png")));
 		toolBar.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actual = ControladorProfesores.getInstance().findPrimero();
+				cargarActualEnPantalla();
+			}
+		});
+		
 		
 		JButton btnNewButton_1 = new JButton("");
 		btnNewButton_1.setIcon(new ImageIcon(PanelDatosEstudiante.class.getResource("/iconos/patras.png")));
 		toolBar.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actual = ControladorProfesores.getInstance().findAnterior(actual.getId());
+				cargarActualEnPantalla();
+			}
+		});
 		
 		JButton btnNewButton_2 = new JButton("");
 		btnNewButton_2.setIcon(new ImageIcon(PanelDatosEstudiante.class.getResource("/iconos/palante.png")));
 		toolBar.add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actual = ControladorProfesores.getInstance().findSiguiente(actual.getId());
+				cargarActualEnPantalla();
+			}
+		});
 		
 		JButton btnNewButton_3 = new JButton("");
 		btnNewButton_3.setIcon(new ImageIcon(PanelDatosEstudiante.class.getResource("/iconos/ultimo.png")));
 		toolBar.add(btnNewButton_3);
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actual = ControladorProfesores.getInstance().findUltimo();
+				cargarActualEnPantalla();
+			}
+		});
+		
 		
 		JButton btnNewButton_4 = new JButton("");
 		btnNewButton_4.setIcon(new ImageIcon(PanelDatosEstudiante.class.getResource("/iconos/guardar.png")));
 		toolBar.add(btnNewButton_4);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				guardar();
+			}
+		});
+		
 		
 		JButton btnNewButton_5 = new JButton("");
 		btnNewButton_5.setIcon(new ImageIcon(PanelDatosEstudiante.class.getResource("/iconos/nuevo.png")));
 		toolBar.add(btnNewButton_5);
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vaciarCampos();
+			}
+		});
 		
 		JButton btnNewButton_6 = new JButton("");
 		btnNewButton_6.setIcon(new ImageIcon(PanelDatosEstudiante.class.getResource("/iconos/eliminar.png")));
 		toolBar.add(btnNewButton_6);
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				borrar();
+				vaciarCampos();
+			}
+		});
 		
 		
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -131,6 +170,7 @@ public class PanelDatosProfesores extends JPanel {
 	 * 
 	 */
 	private void vaciarCampos() {
+		this.actual.setId(0);
         this.p.jtfNombre.setText("");
         this.p.jtfApellido1.setText("");
         this.p.jtfApellido2.setText("");
@@ -145,7 +185,7 @@ public class PanelDatosProfesores extends JPanel {
 	/**
 	 * 
 	 */
-	private void guardar () {
+	private void guardar() {
         cargarActualDesdePantalla();
         boolean resultado = ControladorProfesores.getInstance().guardar(this.actual);
         if (resultado == true && this.actual != null && this.actual.getId() > 0) {

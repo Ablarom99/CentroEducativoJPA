@@ -5,9 +5,13 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.List;
+
 import javax.swing.JTextField;
 
+
 import model.Tipologiasexo;
+import model.controllers.ControladorTipologiaSexo;
 
 import javax.swing.JComboBox;
 
@@ -27,6 +31,7 @@ public class pnlDatosPersonales extends JPanel {
 	 * Create the panel.
 	 */
 	public pnlDatosPersonales() {
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -118,13 +123,13 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_jtfDni.gridy = 4;
 		add(jtfDni, gbc_jtfDni);
 		
-		JLabel lblDireccin = new JLabel("Dirección:");
-		GridBagConstraints gbc_lblDireccin = new GridBagConstraints();
-		gbc_lblDireccin.anchor = GridBagConstraints.EAST;
-		gbc_lblDireccin.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDireccin.gridx = 0;
-		gbc_lblDireccin.gridy = 5;
-		add(lblDireccin, gbc_lblDireccin);
+		JLabel lblDireccion = new JLabel("Dirección:");
+		GridBagConstraints gbc_lblDireccion = new GridBagConstraints();
+		gbc_lblDireccion.anchor = GridBagConstraints.EAST;
+		gbc_lblDireccion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDireccion.gridx = 0;
+		gbc_lblDireccion.gridy = 5;
+		add(lblDireccion, gbc_lblDireccion);
 		
 		jtfDir = new JTextField();
 		jtfDir.setColumns(10);
@@ -167,8 +172,16 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_jtfTel.gridx = 1;
 		gbc_jtfTel.gridy = 7;
 		add(jtfTel, gbc_jtfTel);
-
+		cargarDatos();
 	}
+	private void cargarDatos() {
+        List<Tipologiasexo> sexo = ControladorTipologiaSexo.getInstance().findAll();
+
+        for (Tipologiasexo t : sexo) {
+            this.jcbSexo.addItem(t);
+        }
+    }
+	
 	public String getNombre() {
 		return this.jtfNombre.getText();
 	}
@@ -196,8 +209,8 @@ public class pnlDatosPersonales extends JPanel {
 	public String getDir() {
 		return this.jtfDir.getText();
 	}
-	public void setDir(String dir) {
-		this.jtfDni.setText(dir);
+	public void setDir(String direccion) {
+		this.jtfDir.setText(direccion);
 	}
 	public String getEmail() {
 		return this.jtfEmail.getText();
