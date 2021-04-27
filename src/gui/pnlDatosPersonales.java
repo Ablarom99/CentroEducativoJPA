@@ -12,15 +12,15 @@ import model.Tipologiasexo;
 import javax.swing.JComboBox;
 
 public class pnlDatosPersonales extends JPanel {
-	private JTextField jtfNombre;
-	private JTextField jtfApellido1;
-	private JTextField jtfApellido2;
-	private JTextField jtfDni;
-	private JTextField jtfDir;
-	private JTextField jtfEmail;
-	private JTextField jtfTel;
-	private JLabel lblSexo;
-	private JComboBox<Tipologiasexo>jcbSexo;
+	protected JTextField jtfNombre;
+	protected JTextField jtfApellido1;
+	protected JTextField jtfApellido2;
+	protected JTextField jtfDni;
+	protected JTextField jtfDir;
+	protected JTextField jtfEmail;
+	protected JTextField jtfTel;
+	protected JLabel lblSexo;
+	protected JComboBox<Tipologiasexo>jcbSexo;
 
 	
 	/**
