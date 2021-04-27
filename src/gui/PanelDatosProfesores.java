@@ -146,8 +146,13 @@ public class PanelDatosProfesores extends JPanel {
 			this.p.setDir(this.actual.getDireccion());
 			this.p.setEmail(this.actual.getEmail());
 			this.p.setTelefono(this.actual.getTelefono());
-			Tipologiasexo t = (Tipologiasexo) p.getJcbSexo().getSelectedItem();
-	        this.actual.setTipologiasexo(t);
+			for (int i = 0; i < this.p.getJcbSexo().getItemCount(); i++) {
+                if (this.actual.getTipologiasexo().getId() == this.p.getJcbSexo().getItemAt(i).getId()) {
+                    this.p.getJcbSexo().setSelectedIndex(i);
+
+                }
+            }
+			this.p.setColor(this.actual.getColorFavorito());
 		}
 	}
 	
@@ -164,6 +169,7 @@ public class PanelDatosProfesores extends JPanel {
         this.actual.setTelefono(this.p.getTelefono());
         Tipologiasexo t = (Tipologiasexo) this.p.getJcbSexo().getSelectedItem();
         this.actual.setTipologiasexo(t);
+        this.actual.setColorFavorito(this.p.getColor());
     }
 	
 	/**
@@ -179,6 +185,7 @@ public class PanelDatosProfesores extends JPanel {
         this.p.jtfTel.setText("");
         this.p.jtfEmail.setText("");
         this.p.jcbSexo.setSelectedIndex(0);
+        this.p.setColor("");
     }
 	
 	

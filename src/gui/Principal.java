@@ -30,7 +30,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		super("Datos");
-		this.setBounds(0, 0, 600, 400);
+		this.setBounds(0, 0, 700, 400);
 		
 		this.setJMenuBar(new MenuBar());
 		
