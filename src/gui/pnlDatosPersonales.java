@@ -3,6 +3,7 @@ package gui;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -10,18 +11,29 @@ import java.awt.Insets;
 import java.util.List;
 
 import javax.swing.JTextField;
-
+import javax.swing.filechooser.FileFilter;
 
 import model.Tipologiasexo;
 import model.controllers.ControladorTipologiaSexo;
 
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.awt.event.ActionEvent;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class pnlDatosPersonales extends JPanel {
 	protected JTextField jtfNombre;
@@ -36,12 +48,18 @@ public class pnlDatosPersonales extends JPanel {
 	private JScrollPane scrollPane;
 	private JButton btnSeleccionar;
 	private JButton btnColor;
-	private JTextField jtfColor;
+	public JTextField jtfColor;
 	private JLabel lblNewLabel;
 	JColorChooser bg;
 	String strColor;
 	Color color;
-
+	private JScrollPane jspImagen;
+	private String imagenAMostrar;
+	private JFileChooser jfileChooser;
+	private Object jtaContenidoFichero;
+	private byte imagen[] = new byte[] {};
+	private JPopupMenu popupMenu;
+	private JLabel lblDimensiones;
 	
 	/**
 	 * Create the panel.
@@ -115,6 +133,17 @@ public class pnlDatosPersonales extends JPanel {
 		gbc_scrollPane.gridy = 0;
 		add(scrollPane, gbc_scrollPane);
 		
+		jspImagen = new JScrollPane();
+		scrollPane.setViewportView(jspImagen);
+		
+		popupMenu = new JPopupMenu();
+		
+		lblDimensiones = new JLabel("New label");
+		popupMenu.add(lblDimensiones);
+		popupMenu.addSeparator();
+        popupMenu.add(crearNuevoMenuItem("Cambiar imagen"));
+        addPopup(scrollPane, popupMenu);
+		
 		lblSexo = new JLabel("Sexo:");
 		GridBagConstraints gbc_lblSexo = new GridBagConstraints();
 		gbc_lblSexo.anchor = GridBagConstraints.EAST;
@@ -168,6 +197,7 @@ public class pnlDatosPersonales extends JPanel {
 		btnSeleccionar = new JButton("Selecciona Imagen");
 		btnSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				seleccionaImagen();
 			}
 		});
 		GridBagConstraints gbc_btnSeleccionar = new GridBagConstraints();
@@ -240,6 +270,19 @@ public class pnlDatosPersonales extends JPanel {
 		add(btnColor, gbc_btnColor);
 		cargarDatos();
 	}
+	private JMenuItem crearNuevoMenuItem (String titulo) {
+        JMenuItem item = new JMenuItem(titulo);
+        item.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (titulo == "Cambiar imagen") {
+                    seleccionaImagen();
+                }
+            }
+        });
+
+        return item;
+    }
 	private void seleccionaColor() {
 		color=bg.showDialog(null, "Seleccione un color", color.cyan);
 		if (color != null) {
@@ -248,6 +291,87 @@ public class pnlDatosPersonales extends JPanel {
             setBackground(color);
         }
 	}
+	
+	private void seleccionaImagen() {
+this.jfileChooser = new JFileChooser();
+		
+		// Configurando el componente
+		
+		// Establecimiento de la carpeta de inicio
+		this.jfileChooser.setCurrentDirectory(new File("C:\\"));
+		
+		// Tipo de selecci�n que se hace en el di�logo
+		this.jfileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); // S�lo selecciona ficheros
+		//this.jfileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // S�lo selecciona ficheros
+		//this.jfileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES); // Selecciona ficheros y carpetas
+		
+		// Filtro del tipo de ficheros que puede abrir
+		this.jfileChooser.setFileFilter(new FileFilter() {
+			
+			@Override
+			public String getDescription() {
+				return "Imágenes *.png, *.jpg";
+			}
+			
+			@Override
+			public boolean accept(File f) {
+				if (f.isFile() && f.getAbsolutePath().endsWith(".png") || f.getAbsolutePath().endsWith(".jpg") ) 
+					return true;
+				return false;
+			}
+		});
+		
+		// Abro el di�logo para la elecci�n del usuario
+		int seleccionUsuario = jfileChooser.showOpenDialog(null);
+		
+		if (seleccionUsuario == JFileChooser.APPROVE_OPTION) {
+			File fichero = this.jfileChooser.getSelectedFile();
+			
+			// Vuelco el nombre del fichero sobre el JTextField
+			this.jtfNombre.setText(fichero.getAbsolutePath());
+			
+			// Volcamos el contenido del fichero al JTextArea
+			((JLabel) this.jtaContenidoFichero).setText(leerContenidoFicheroTexto(fichero));
+		}
+	}
+	private String leerContenidoFicheroTexto (File f) {
+		if (f.isFile()) {
+			try {
+				FileReader fileReader = new FileReader(f);
+				BufferedReader bufferedReader = new BufferedReader(fileReader);
+		
+				StringBuffer sb = new StringBuffer();
+				String lineaDelFichero;
+		
+				// Lectura del fichero l�nea a l�nea
+				while ((lineaDelFichero = bufferedReader.readLine()) != null) {
+					sb.append(lineaDelFichero + "\n");
+				}
+				
+				return sb.toString();
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return "Imposible obtener el contenido del fichero";
+	}
+	
+	
+	/**
+	 * 
+	 * @param f
+	 * @return
+	 */
+	private byte[] leerContenidoFicheroBinario (File f) {
+		try {
+			return Files.readAllBytes(f.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new byte[] {};
+	}
 	private void cargarDatos() {
         List<Tipologiasexo> sexo = ControladorTipologiaSexo.getInstance().findAll();
 
@@ -255,6 +379,8 @@ public class pnlDatosPersonales extends JPanel {
             this.jcbSexo.addItem(t);
         }
     }
+	
+	
 	
 	public String getNombre() {
 		return this.jtfNombre.getText();
@@ -323,6 +449,46 @@ public class pnlDatosPersonales extends JPanel {
             this.setBackground(Color.black);
         }
 	}
+	public void setImagen(byte imagen[]) {
+        ImageIcon icon = new ImageIcon(imagen);
+        JLabel lbl = new JLabel(icon);
+        this.scrollPane.setViewportView(lbl);
+        this.scrollPane.revalidate();
+        this.scrollPane.repaint();
+    }
+
+    public byte[] getImagen() {
+        return this.imagen;
+    }
+
+    public void setLabelImag (String str) {
+        JLabel lbl = new JLabel(str);
+        this.scrollPane.setViewportView(lbl);
+    }
+    public JLabel getlblDimensiones() {
+		return lblDimensiones;
+	}
+	public void setlabelDimensiones(String lblDimensiones) {
+		this.lblDimensiones.setText(lblDimensiones);
+	}
+    
     
 
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }

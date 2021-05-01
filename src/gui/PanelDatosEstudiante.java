@@ -20,8 +20,13 @@ import model.controllers.ControladorProfesores;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.JButton;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class PanelDatosEstudiante extends JPanel {
@@ -152,8 +157,25 @@ public class PanelDatosEstudiante extends JPanel {
                 }
             }
 			this.p.setColor(this.actual.getColorFavorito());
+			this.p.setImagen(this.actual.getImagen());
+			this.p.setlabelDimensiones(calculaPixeles());
 		}
 	}
+	private String calculaPixeles () {
+
+        String str = "";
+        InputStream is = new ByteArrayInputStream( this.actual.getImagen());
+
+        try {
+            BufferedImage newBi = ImageIO.read(is);
+             str = newBi.getWidth() + " x " + newBi.getHeight() + " píxeles";
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return str;
+    }
 	
 	/**
 	 * 
@@ -169,13 +191,14 @@ public class PanelDatosEstudiante extends JPanel {
         Tipologiasexo t = (Tipologiasexo) this.p.getJcbSexo().getSelectedItem();
         this.actual.setTipologiasexo(t);
         this.actual.setColorFavorito(this.p.getColor());
+        this.actual.setImagen(this.p.getImagen());
     }
 	
 	/**
 	 * 
 	 */
 	private void vaciarCampos() {
-		this.actual.setId(0);
+        this.actual.setId(0);
         this.p.jtfNombre.setText("");
         this.p.jtfApellido1.setText("");
         this.p.jtfApellido2.setText("");
@@ -183,8 +206,10 @@ public class PanelDatosEstudiante extends JPanel {
         this.p.jtfDir.setText("");
         this.p.jtfTel.setText("");
         this.p.jtfEmail.setText("");
-        this.p.jcbSexo.setSelectedIndex(0);
-        this.p.setColor("");
+        this.p.jcbSexo.setSelectedItem(null);
+        this.p.setColor(null);
+        this.p.jtfColor.setText("");
+        this.p.setLabelImag("");
     }
 	
 	

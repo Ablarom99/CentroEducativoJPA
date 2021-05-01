@@ -5,7 +5,6 @@
 		<class>model.Estudiante</class>
 		<class>model.Materia</class>
 		<class>model.Profesor</class>
-		<class>model.Sequence</class>
 		<class>model.Tipologiasexo</class>
 		<class>model.Valoracionmateria</class>
 		<properties>
