@@ -41,7 +41,6 @@ public class PanelNotas extends JPanel {
 	 */
 	public PanelNotas() {
 		initialize();
-		this.actual = ControladorMateria.getInstance().findPrimero();
 		cargarDatos();
 
 	}
@@ -124,7 +123,7 @@ public class PanelNotas extends JPanel {
         gbc_btnNewButton_1.gridx = 2;
         gbc_btnNewButton_1.gridy = 3;
         add(btnGuardar, gbc_btnNewButton_1);
-        cargarDatos();
+        
 
 	}
 	
