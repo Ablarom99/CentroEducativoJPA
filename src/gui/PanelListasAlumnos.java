@@ -16,15 +16,15 @@ public class PanelListasAlumnos extends JPanel {
 	 */
 	public PanelListasAlumnos() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 10;
+		gbc_panel.gridwidth = 9;
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
@@ -48,7 +48,7 @@ public class PanelListasAlumnos extends JPanel {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setToolTipText("");
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.gridwidth = 10;
+		gbc_comboBox.gridwidth = 11;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 1;
@@ -65,7 +65,7 @@ public class PanelListasAlumnos extends JPanel {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.gridwidth = 10;
+		gbc_comboBox_1.gridwidth = 11;
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_1.gridx = 1;
@@ -82,7 +82,7 @@ public class PanelListasAlumnos extends JPanel {
 		
 		JComboBox comboBox_2 = new JComboBox();
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.gridwidth = 10;
+		gbc_comboBox_2.gridwidth = 11;
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_2.gridx = 1;
@@ -99,7 +99,7 @@ public class PanelListasAlumnos extends JPanel {
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.gridheight = 5;
-		gbc_panel_1.gridwidth = 10;
+		gbc_panel_1.gridwidth = 9;
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
@@ -186,7 +186,6 @@ public class PanelListasAlumnos extends JPanel {
 		JButton btnGuardar = new JButton("Guardar la nota de todos los alumnos seleccionados");
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.gridwidth = 2;
-		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnGuardar.gridx = 7;
 		gbc_btnGuardar.gridy = 6;
 		add(btnGuardar, gbc_btnGuardar);

@@ -48,6 +48,7 @@ public class Principal extends JFrame {
 		jTabbedPane.add("Estudiante", new PanelDatosEstudiante());
 		jTabbedPane.add("Profesores", new PanelDatosProfesores());
 		jTabbedPane.add("Notas", new PanelNotas());
+		jTabbedPane.add("Alumnos", new PanelListasAlumnos());
 		
 		
 		return jTabbedPane;
