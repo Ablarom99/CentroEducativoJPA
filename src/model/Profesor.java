@@ -9,6 +9,7 @@ import java.util.List;
  * The persistent class for the profesor database table.
  * 
  */
+@Table (name="profesor")
 @Entity
 @NamedQuery(name="Profesor.findAll", query="SELECT p FROM Profesor p")
 public class Profesor implements Serializable {

@@ -9,6 +9,7 @@ import java.util.List;
  * The persistent class for the curso database table.
  * 
  */
+@Table (name="curso")
 @Entity
 @NamedQuery(name="Curso.findAll", query="SELECT c FROM Curso c")
 public class Curso implements Serializable {

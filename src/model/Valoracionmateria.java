@@ -8,6 +8,7 @@ import javax.persistence.*;
  * The persistent class for the valoracionmateria database table.
  * 
  */
+@Table (name="valoracionmateria")
 @Entity
 @NamedQuery(name="Valoracionmateria.findAll", query="SELECT v FROM Valoracionmateria v")
 public class Valoracionmateria implements Serializable {
