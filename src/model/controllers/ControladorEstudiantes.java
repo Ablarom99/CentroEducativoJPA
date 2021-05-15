@@ -1,7 +1,11 @@
 package model.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -12,10 +16,10 @@ import model.Profesor;
 
 public class ControladorEstudiantes {
 
-	
+	 private static ControladorEstudiantes controller = null;
 		private static ControladorEstudiantes instance = null;
 
-		private EntityManagerFactory factory = Persistence.createEntityManagerFactory("CentroEducativoJPA"); 
+		private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("CentroEducativoJPA"); 
 		
 		/**
 		 * 
@@ -121,6 +125,28 @@ public class ControladorEstudiantes {
 				e1.printStackTrace();
 				return false;
 			}
+		}
+		
+		
+		/**
+		 * 
+		 */
+		
+		
+		/**
+		 * 
+		 */
+		public static List<Estudiante> findAllEstudiantes () {
+			List<Estudiante> entities = new ArrayList<Estudiante>();
+			EntityManager em = factory.createEntityManager();
+			try {			
+				Query q = em.createNativeQuery("SELECT * FROM estudiante", Estudiante.class);
+				entities = (List<Estudiante>) q.getResultList();
+			}
+			catch (NoResultException nrEx) {
+			}
+			em.close();
+			return entities;
 		}
 
 
