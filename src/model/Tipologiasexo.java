@@ -9,6 +9,7 @@ import java.util.List;
  * The persistent class for the tipologiasexo database table.
  * 
  */
+@Table(name="tipologiasexo")
 @Entity
 @NamedQuery(name="Tipologiasexo.findAll", query="SELECT t FROM Tipologiasexo t")
 public class Tipologiasexo implements Serializable {

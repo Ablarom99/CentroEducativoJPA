@@ -9,6 +9,7 @@ import java.util.List;
  * The persistent class for the materia database table.
  * 
  */
+@Table(name="materia")
 @Entity
 @NamedQuery(name="Materia.findAll", query="SELECT m FROM Materia m")
 public class Materia implements Serializable {
