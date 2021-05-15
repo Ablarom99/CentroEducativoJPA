@@ -77,4 +77,10 @@ public class Valoracionmateria implements Serializable {
 		this.profesor = profesor;
 	}
 
+	@Override
+	public String toString() {
+		return "" + valoracion + "";
+	}
+	
+
 }
