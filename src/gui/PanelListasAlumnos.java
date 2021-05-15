@@ -23,6 +23,7 @@ import java.awt.Insets;
 import java.util.List;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -275,18 +276,34 @@ public class PanelListasAlumnos extends JPanel {
 	 * 
 	 */
 	private void guardar() {
-		Valoracionmateria valoracionMateria = null;
-		for(Valoracionmateria valoracionMatertiaActual : ControladorValoracionMateria.getInstance().findAll()) {
-			for(int i = 0; i < dlmSeleccionados.size();i++) {
-				Estudiante est = dlmNoSeleccionados.elementAt(i);
-				if(valoracionMatertiaActual.getEstudiante().getId() == est.getId() && valoracionMatertiaActual.getMateria().getId() == materia.getId()
-						&& valoracionMatertiaActual.getProfesor().getId() == profesor.getId()) {
-					valoracionMatertiaActual.setValoracion(-1);
-					valoracionMateria = valoracionMatertiaActual;
-					break;
-				} 
+		Materia m = (Materia)jcbMateria.getSelectedItem();
+		Profesor p = (Profesor)jcbProfesor.getSelectedItem();
+		int nota = (int) jcbNota.getSelectedItem();
+		
+		Valoracionmateria vm = null;
+		
+		for (int i = 0; i < this.dlmSeleccionados.size(); i++) {
+			Estudiante e = this.dlmSeleccionados.elementAt(i);
+			
+			vm = ControladorValoracionMateria.getInstance().findEstProfMat(p, m, e);
+			if (vm == null) {
+				vm = new Valoracionmateria();
+				vm.setEstudiante(e);
+				vm.setMateria(m);
+				vm.setProfesor(p);
+				vm.setValoracion(nota);
 			}
-			ControladorValoracionMateria.getInstance().guardar(valoracionMatertiaActual);
+			else {
+				vm.setValoracion((int) this.jcbNota.getSelectedItem());
+				ControladorValoracionMateria.getInstance().guardar(vm);
+				
+			}
+		}
+		boolean resultado = ControladorValoracionMateria.getInstance().guardar(vm);
+		if (resultado == true) {
+			JOptionPane.showMessageDialog(null, "Registro guardado correctamente");
+		} else {
+			JOptionPane.showMessageDialog(null, "Error al guardar");
 		}
 	}
 	/**

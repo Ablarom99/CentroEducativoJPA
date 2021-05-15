@@ -88,4 +88,21 @@ public class ControladorValoracionMateria {
 		}
 		return true;
 	}
+	public Valoracionmateria findEstProfMat (Profesor profesor, Materia materia, Estudiante estudiante) {
+		Valoracionmateria resultado = null;
+		EntityManager em = factory.createEntityManager();
+		 
+		try {
+			Query q = em.createNativeQuery("Select * from valoracionmateria where idProfesor = ? and "
+					+ "idMateria = ? and idEstudiante = ?", Valoracionmateria.class);
+			q.setParameter(1, profesor.getId());
+			q.setParameter(2, materia.getId());
+			q.setParameter(3, estudiante.getId());
+			resultado = (Valoracionmateria) q.getSingleResult();
+		}
+		catch (Exception ex) {
+		}
+		em.close();
+		return resultado;
+	}
 }
