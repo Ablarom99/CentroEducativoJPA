@@ -279,6 +279,7 @@ public class PanelListasAlumnos extends JPanel {
 		Materia m = (Materia)jcbMateria.getSelectedItem();
 		Profesor p = (Profesor)jcbProfesor.getSelectedItem();
 		int nota = (int) jcbNota.getSelectedItem();
+		boolean resultado = false;
 		
 		Valoracionmateria vm = null;
 		
@@ -298,8 +299,9 @@ public class PanelListasAlumnos extends JPanel {
 				ControladorValoracionMateria.getInstance().guardar(vm);
 				
 			}
+			resultado = ControladorValoracionMateria.getInstance().guardar(vm);
 		}
-		boolean resultado = ControladorValoracionMateria.getInstance().guardar(vm);
+
 		if (resultado == true) {
 			JOptionPane.showMessageDialog(null, "Registro guardado correctamente");
 		} else {

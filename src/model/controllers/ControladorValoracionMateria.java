@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -105,4 +106,22 @@ public class ControladorValoracionMateria {
 		em.close();
 		return resultado;
 	}
+//	public Valoracionmateria findByMateriaAndProfesorAndEstudianteAndValoracion (Materia m, Profesor p, Estudiante e, float v) {
+//		Valoracionmateria resultado = null;
+//		try {
+//			EntityManager em = this.factory.createEntityManager();
+//			Query q = em.createNativeQuery("SELECT * FROM valoracionmateria where idMateria = ? and "
+//					+ "idProfesor = ? and idEstudiante = ? and valoracion = ?", Valoracionmateria.class);
+//			q.setParameter(1, m.getId());
+//			q.setParameter(2, p.getId());
+//			q.setParameter(3, e.getId());
+//			q.setParameter(4, v);
+//			resultado = (Valoracionmateria) q.getSingleResult();
+//			em.close();
+//		}
+//		catch (NoResultException nrEx) {
+//		}
+//		return resultado;
+//	}
+	
 }
